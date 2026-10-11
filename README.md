@@ -93,7 +93,7 @@ inconnu), `409` (morceau manquant ou job pas prêt), `413` (trop gros), `422`
 | `MAX_BYTES` | `25000000` | Taille max d'un fichier source |
 | `MAX_PAGES` | `60` | Pages max rastérisées |
 | `RENDER_DPI` | `120` | Résolution des images |
-| `CONVERT_TIMEOUT_MS` | `180000` | Délai max par étape de conversion |
+| `CONVERT_TIMEOUT_MS` | `300000` | Délai max par étape de conversion |
 | `MAX_CHUNKS` | `64` | Morceaux max par document |
 | `TTL_MS` | `1800000` | Âge avant purge d'un job/morceau abandonné |
 

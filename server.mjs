@@ -20,7 +20,7 @@ import path from "node:path"
  *   MAX_BYTES           taille max d'un fichier source (défaut 25 Mo)
  *   MAX_PAGES           nombre max de pages rastérisées (défaut 60)
  *   RENDER_DPI          résolution de rastérisation (défaut 120)
- *   CONVERT_TIMEOUT_MS  délai max par étape de conversion (défaut 180000)
+ *   CONVERT_TIMEOUT_MS  délai max par étape de conversion (défaut 300000)
  *   MAX_CHUNKS          nombre max de morceaux par fichier (défaut 64)
  *   TTL_MS              âge au-delà duquel jobs/morceaux sont purgés
  */
@@ -30,7 +30,7 @@ const TOKEN = (process.env.CONVERT_TOKEN || "").trim()
 const MAX_BYTES = Number(process.env.MAX_BYTES || 25_000_000)
 const MAX_PAGES = Number(process.env.MAX_PAGES || 60)
 const RENDER_DPI = Number(process.env.RENDER_DPI || 120)
-const CONVERT_TIMEOUT_MS = Number(process.env.CONVERT_TIMEOUT_MS || 180_000)
+const CONVERT_TIMEOUT_MS = Number(process.env.CONVERT_TIMEOUT_MS || 300_000)
 const MAX_CHUNKS = Number(process.env.MAX_CHUNKS || 64)
 const TTL_MS = Number(process.env.TTL_MS || 30 * 60_000)
 const MAX_JSON_BYTES = Math.ceil((MAX_BYTES * 4) / 3) + 2_000_000
