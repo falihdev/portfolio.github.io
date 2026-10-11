@@ -55,12 +55,34 @@ Réponse d'un morceau intermédiaire :
 { "pending": true, "received": 1, "total": 3 }
 ```
 
-Réponse du dernier morceau (rassemble puis convertit) : identique à `/convert`
-(`{ "images": [...] }`).
+Réponse du **dernier** morceau : la conversion démarre **en arrière-plan** et le
+service renvoie un identifiant de travail (réponse immédiate) :
 
-Codes d'erreur : `400` (requête invalide), `401` (jeton), `409` (morceau
-manquant), `413` (trop gros), `422` (conversion impossible), `504` (délai
-dépassé).
+```json
+{ "jobId": "9f3c1e…" }
+```
+
+### `GET /jobs/:id`
+
+État d'une conversion :
+
+```json
+{ "status": "processing" }
+{ "status": "done", "pageCount": 42 }
+{ "status": "error", "error": 422 }
+```
+
+### `GET /jobs/:id/pages/:index`
+
+Renvoie une page rastérisée :
+
+```json
+{ "name": "cours-page1.png", "mimeType": "image/png", "dataBase64": "..." }
+```
+
+Codes d'erreur : `400` (requête invalide), `401` (jeton), `404` (job/page
+inconnu), `409` (morceau manquant ou job pas prêt), `413` (trop gros), `422`
+(conversion impossible), `504` (délai dépassé).
 
 ## Variables d'environnement
 
@@ -69,11 +91,11 @@ dépassé).
 | `PORT` | `8080` | Port d'écoute |
 | `CONVERT_TOKEN` | *(vide)* | Jeton partagé. **À définir en production.** |
 | `MAX_BYTES` | `25000000` | Taille max d'un fichier source |
-| `MAX_PAGES` | `40` | Pages max rastérisées |
-| `RENDER_DPI` | `130` | Résolution des images |
-| `CONVERT_TIMEOUT_MS` | `60000` | Délai max par étape de conversion |
+| `MAX_PAGES` | `60` | Pages max rastérisées |
+| `RENDER_DPI` | `120` | Résolution des images |
+| `CONVERT_TIMEOUT_MS` | `180000` | Délai max par étape de conversion |
 | `MAX_CHUNKS` | `64` | Morceaux max par document |
-| `CHUNK_TTL_MS` | `1800000` | Âge avant purge d'une session de morceaux abandonnée |
+| `TTL_MS` | `1800000` | Âge avant purge d'un job/morceau abandonné |
 
 ## Lancer en local (Docker)
 
